@@ -1,34 +1,27 @@
 # 🩺 Pneumonia Detection System
 
-An AI-powered web application for detecting pneumonia from chest X-ray images using deep learning. The project uses a VGG19 transfer learning model trained on chest X-ray images and provides predictions through a FastAPI backend with a modern React frontend.
+An AI-powered web application for detecting pneumonia from chest X-ray images using a VGG19 deep learning model. The project combines a React frontend, FastAPI backend, and TensorFlow/Keras model to provide fast and accurate predictions.
+
+> **Disclaimer**
+>
+> This project is intended for **research and educational purposes only**. It is **not a certified medical device** and must not be used for clinical diagnosis.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-- 🧠 VGG19 Transfer Learning
-- 📷 Chest X-ray image upload
+- 🧠 AI-powered chest X-ray analysis
+- 📷 Upload JPEG or PNG X-ray images
 - ⚡ FastAPI REST API
-- 🎨 Modern React + Vite frontend
-- 📊 Training metrics visualization
-- 📈 Confusion matrix generation
-- 🎯 Confidence score prediction
+- 🎨 Modern React + TypeScript interface
+- 📊 Confidence score for every prediction
+- 📈 Class probability visualization
 - 🔍 Binary classification (NORMAL / PNEUMONIA)
+- 📱 Responsive design
 
 ---
 
-## 🖼️ Demo
-
-Upload a chest X-ray image and receive:
-
-- Prediction (NORMAL / PNEUMONIA)
-- Confidence score
-- Class probabilities
-- Inference time
-
----
-
-## 📊 Model Performance
+# 📊 Model Performance
 
 | Metric | Score |
 |---------|-------|
@@ -39,34 +32,35 @@ Upload a chest X-ray image and receive:
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠 Tech Stack
 
-### Machine Learning
+## Machine Learning
 
 - TensorFlow
 - Keras
-- VGG19
+- VGG19 Transfer Learning
 - NumPy
 - Pillow
 
-### Backend
+## Backend
 
 - FastAPI
 - Uvicorn
 - Python
 
-### Frontend
+## Frontend
 
 - React
 - TypeScript
 - Vite
+- Tailwind CSS
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
-PneumoniaProject
+PneumoniaProject/
 │
 ├── backend/
 │   ├── main.py
@@ -76,56 +70,95 @@ PneumoniaProject
 │   ├── train.py
 │   ├── evaluate.py
 │   ├── eda.py
-│   └── pneumonia_vgg19.ipynb
+│   ├── pneumonia_vgg19.ipynb
+│   └── outputs/
 │
 ├── src/
 ├── public/
+├── package.json
 ├── README.md
-└── package.json
+└── .gitignore
 ```
 
 ---
 
-## 🚀 Installation
+# 🚀 Installation
 
-### Clone the repository
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/Rawonz/PneumoniaProject.git
+
 cd PneumoniaProject
 ```
 
-### Backend
+---
+
+## 2. Backend Setup
+
+Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Activate it
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+Run the API
 
 ```bash
 cd backend
 
-python -m venv venv
-
-venv\Scripts\activate
-
-pip install -r requirements.txt
-
 python -m uvicorn main:app --reload
 ```
 
-Backend will run on:
+Backend:
 
 ```
 http://127.0.0.1:8000
 ```
 
+Swagger Documentation:
+
+```
+http://127.0.0.1:8000/docs
+```
+
 ---
 
-### Frontend
+## 3. Frontend Setup
+
+Install packages
 
 ```bash
 npm install
+```
 
+Start development server
+
+```bash
 npm run dev
 ```
 
-Frontend will run on:
+Frontend:
 
 ```
 http://localhost:5173
@@ -133,67 +166,191 @@ http://localhost:5173
 
 ---
 
-## 📷 API Endpoint
+# 📖 Usage
 
-### POST /predict
+## Step 1
+
+Run the backend.
+
+```bash
+python -m uvicorn main:app --reload
+```
+
+---
+
+## Step 2
+
+Run the frontend.
+
+```bash
+npm run dev
+```
+
+---
+
+## Step 3
+
+Open
+
+```
+http://localhost:5173
+```
+
+---
+
+## Step 4
 
 Upload a chest X-ray image.
 
-Example response:
+Supported formats
+
+- JPEG
+- JPG
+- PNG
+
+Maximum file size
+
+```
+10 MB
+```
+
+---
+
+## Step 5
+
+Wait for the prediction.
+
+The application returns
+
+- Prediction
+- Confidence Score
+- Class Probabilities
+- Inference Time
+
+---
+
+# 🌐 REST API
+
+## POST /predict
+
+Upload a chest X-ray image.
+
+Example response
 
 ```json
 {
-  "prediction": "PNEUMONIA",
-  "confidence": 0.9821,
+  "prediction": "NORMAL",
+  "confidence": 0.94,
   "probabilities": {
-    "NORMAL": 0.0179,
-    "PNEUMONIA": 0.9821
+    "NORMAL": 0.94,
+    "PNEUMONIA": 0.06
   },
-  "inference_ms": 42.8
+  "inference_ms": 289.6
 }
 ```
 
 ---
 
-## 📈 Training
+## GET /health
 
-The model was trained using transfer learning with **VGG19** and binary classification.
+Returns API health status.
 
-Training outputs include:
+Example
 
-- Training Curves
-- Confusion Matrix
-- Metrics JSON
-- Class Indices
-
----
-
-## ⚠️ Note
-
-The trained model (.h5) and dataset are not included in this repository because of GitHub file size limitations.
+```json
+{
+  "status": "ok",
+  "model_ready": true
+}
+```
 
 ---
 
-## 📌 Future Improvements
+# 🧠 Model
+
+The application uses **VGG19 Transfer Learning** for binary image classification.
+
+Classes
+
+```
+NORMAL
+PNEUMONIA
+```
+
+Training includes
+
+- Data preprocessing
+- Data augmentation
+- Transfer Learning
+- Fine-tuning
+- Binary classification
+
+---
+
+# 📈 Training Outputs
+
+After training, the following files are generated
+
+```
+training_curves.png
+confusion_matrix.png
+metrics.json
+training_log.csv
+class_indices.json
+```
+
+---
+
+# ⚠️ Model Files
+
+Large model files are **not included** in this repository because they exceed GitHub's file size limit.
+
+To enable inference, place the following files inside
+
+```
+ml/outputs/
+```
+
+Required files
+
+```
+pneumonia_vgg19_final.h5
+class_indices.json
+```
+
+---
+
+# 📌 Future Improvements
 
 - Docker support
-- User authentication
+- JWT Authentication
+- User accounts
 - Cloud deployment
-- Model optimization
-- Explainable AI (Grad-CAM)
+- Grad-CAM visualization
 - Multi-class disease detection
+- Model optimization
+- Better UI animations
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-**Uğur Aleskerli**
+**RawonzExE**
 
-GitHub:
+GitHub
+
 https://github.com/Rawonz
 
 ---
 
-## ⭐ Support
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⭐ Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
+
+Feedback and contributions are always welcome.
