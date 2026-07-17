@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual Environment
+venv/
+.env
+
+# ML Models
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+
+# Outputs
+outputs/
+ml/outputs/
+
+# TensorBoard
+logs/
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
